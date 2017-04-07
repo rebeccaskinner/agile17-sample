@@ -1,0 +1,8 @@
+hash: 3e093efbe1ad0cb5c10c78ce044ca4f54ca4e1019a9bc4b19c4772c82335e3e2
+updated: 2017-04-07T13:00:38.903278536-05:00
+imports:
+- name: github.com/julienschmidt/httprouter
+  version: 6f3f3919c8781ce5c0509c83fffc887a7830c938
+- name: github.com/Sirupsen/logrus
+  version: c078b1e43f58d563c74cebe63c85789e76ddb627
+testImports: []

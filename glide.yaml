@@ -1,0 +1,4 @@
+package: github.com/rebeccaskinner/agile17-sample
+import:
+  - package: github.com/Sirupsen/logrus
+  - package: github.com/julienschmidt/httprouter
