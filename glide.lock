@@ -1,8 +1,23 @@
-hash: 3e093efbe1ad0cb5c10c78ce044ca4f54ca4e1019a9bc4b19c4772c82335e3e2
-updated: 2017-04-07T13:00:38.903278536-05:00
+hash: 599b7858f4933c8d8dba1cd1b7525b6ec09339b8364f92f87d151d4041e6d151
+updated: 2017-04-07T21:02:44.031239223-05:00
 imports:
 - name: github.com/julienschmidt/httprouter
   version: 6f3f3919c8781ce5c0509c83fffc887a7830c938
+- name: github.com/pkg/errors
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/Sirupsen/logrus
   version: c078b1e43f58d563c74cebe63c85789e76ddb627
-testImports: []
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
+  subpackages:
+  - spew
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert
+  - require
