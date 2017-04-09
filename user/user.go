@@ -2,6 +2,8 @@ package user
 
 import (
 	"encoding/json"
+	"fmt"
+	"math/rand"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -45,7 +47,7 @@ func NewUserFromUser(u *User) (*NewUser, error) {
 		0: []string{"junior", "entry-level"},
 		1: []string{"mid-level"},
 		2: []string{"senior"},
-		3: []string{"principal", "lead"},
+		3: []string{"principle", "lead"},
 	}
 	dep, err := lookupKey(departments, u.Title)
 	if err != nil {
@@ -85,4 +87,63 @@ func lookupIntKey(kv map[uint32][]string, s string) uint32 {
 		}
 	}
 	return 0
+}
+
+func RandomUser() *User {
+	return &User{
+		ID:    randomString(5),
+		Name:  randomString(10),
+		Age:   uint32(rand.Intn(64) + 18),
+		Title: randomTitle(),
+	}
+}
+
+func RandomNewUser() *NewUser {
+	units := []string{"engineering", "executive", "operations"}
+	return &NewUser{
+		ID:           randomString(5),
+		Name:         randomString(10),
+		Level:        uint32(rand.Intn(4)),
+		BusinessUnit: units[rand.Intn(len(units))],
+	}
+}
+
+func randomString(size int) string {
+	const dict = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	const dictSize = len(dict)
+	out := make([]byte, size)
+	for i := 0; i < size; i++ {
+		out[i] = dict[rand.Intn(dictSize)]
+	}
+	return string(out)
+}
+
+func randomTitle() string {
+	jobs := []string{
+		"engineering",
+		"developer",
+		"tester",
+		"cfo",
+		"cto",
+		"ceo",
+		"sre",
+		"dba",
+		"administrator",
+	}
+	levels := []string{
+		"",
+		"junior",
+		"entry-level",
+		"mid-level",
+		"senior",
+		"principle",
+		"lead",
+	}
+	jobsLen := len(jobs)
+	levelLen := len(levels)
+	return fmt.Sprintf(
+		"%s %s",
+		levels[rand.Intn(levelLen)],
+		jobs[rand.Intn(jobsLen)],
+	)
 }

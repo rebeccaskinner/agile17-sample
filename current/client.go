@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -18,7 +20,12 @@ func main() {
 		os.Exit(1)
 	}
 
-	response, err := http.Get(config.endpoint + "/fetch/" + config.username)
+	var (
+		getEndpoint  = fmt.Sprintf("%s/fetch/%s", config.endpoint, config.username)
+		postEndpoint = fmt.Sprintf("%s/post/%s", config.endpoint, config.username)
+	)
+
+	response, err := http.Get(getEndpoint)
 	if err != nil {
 		fmt.Println("unable to fetch HTTP data", err)
 		os.Exit(1)
@@ -35,11 +42,40 @@ func main() {
 		os.Exit(1)
 	}
 
-	user, err := user.NewFromJSON(body)
+	u, err := user.NewFromJSON(body)
 	if err != nil {
 		fmt.Println("failed to deserialize json: ", err)
 		os.Exit(1)
 	}
+
+	newUser, err := user.NewUserFromUser(u)
+
+	if err != nil {
+		fmt.Println("failed to convert user to new format: ", err)
+		os.Exit(1)
+	}
+
+	newUserJSON, err := json.Marshal(newUser)
+
+	if err != nil {
+		fmt.Println("failed to marshal new user: ", err)
+		os.Exit(1)
+	}
+
+	buf := bytes.NewBuffer(newUserJSON)
+	response, err = http.Post(postEndpoint, "application/json", buf)
+
+	if err != nil {
+		fmt.Println("failed to post message: ", err)
+		os.Exit(1)
+	}
+
+	if response.StatusCode != 200 {
+		fmt.Printf("failed to post message: server returned: " + response.Status)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Success")
 
 }
 

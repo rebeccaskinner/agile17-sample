@@ -1,0 +1,74 @@
+[
+    {
+        "id": "suzanne",
+        "name": "Suzanne McCormick",
+        "age": 46,
+        "title": "CEO"
+    },
+    {
+        "id": "amber",
+        "name": "Amber Slaughter",
+        "age": 21,
+        "title": "CFO"
+    },
+    {
+        "id": "james",
+        "name": "James M. Hidalgo",
+        "age": 28,
+        "title": "lead tester"
+    },
+    {
+        "id": "charlie",
+        "name": "Charles Arroyo",
+        "age": 20,
+        "title": "junior developer"
+    },
+    {
+        "id": "marisa",
+        "name": "Marisa A. Nichols",
+        "age": 77,
+        "title": "principle sre"
+    },
+    {
+        "id": "santina",
+        "name": "Santina Ortega Figueroa",
+        "age": 53,
+        "title": "principle dba"
+    },
+    {
+        "id": "anya",
+        "name": "Anya Arce Díaz",
+        "age": 26,
+        "title": "senior developer"
+    },
+    {
+        "id": "rogelia",
+        "name": "Rogelia Holguín Montez",
+        "age": 36,
+        "title": "mid-level dba"
+    },
+    {
+        "id": "rena",
+        "name": "Rena L. Randall",
+        "age": 52,
+        "title": "CTO"
+    },
+    {
+        "id": "phan",
+        "name": "Phan Th Ái Nng",
+        "age": 37,
+        "title": "sre"
+    },
+    {
+        "id": "azra",
+        "name": "Azra Zübeyde Reuter",
+        "age": 29,
+        "title": "senior developer"
+    },
+    {
+        "id": "charles",
+        "name": "Charles T. Brown",
+        "age": 22,
+        "title": "mid-level administrator"
+    }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "suzanne",
+    "name": "Suzanne McCormick",
+    "age": 46,
+    "title": "CPA"
+  },
+  {
+    "id": "amber",
+    "name": "Amber Slaughter",
+    "age": 21,
+    "title": "Senior Litigator"
+  },
+  {
+    "id": "james",
+    "name": "James M. Hidalgo",
+    "age": 28,
+    "title": "Account Manager"
+  },
+  {
+    "id": "dwight",
+    "name": "Dwight Schrute",
+    "age": 42,
+    "title": "Assistant To The Regional Manager"
+  }
+]
