@@ -24,4 +24,7 @@ _testmain.go
 *.prof
 
 # Vendor
-vendor/
+vendor/client-cur
+server
+client-cur
+vendor

@@ -1,4 +1,4 @@
-// Copyright © 2017 Rebecca Skinner, Asteris, LLC
+// Copyright © 2017 NAME HERE <EMAIL ADDRESS>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,9 +14,8 @@
 
 package main
 
-import "github.com/julienschmidt/httprouter"
+import "github.com/rebeccaskinner/agile17-sample/cmd"
 
 func main() {
-	router := httprouter.New()
-	router.Get("/old", handlers.dumpOld)
+	cmd.Execute()
 }

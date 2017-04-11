@@ -21,8 +21,8 @@ func main() {
 	}
 
 	var (
-		getEndpoint  = fmt.Sprintf("%s/fetch/%s", config.endpoint, config.username)
-		postEndpoint = fmt.Sprintf("%s/post/%s", config.endpoint, config.username)
+		getEndpoint  = fmt.Sprintf("%s/oldusers/%s", config.endpoint, config.username)
+		postEndpoint = fmt.Sprintf("%s/newusers/%s", config.endpoint, config.username)
 	)
 
 	response, err := http.Get(getEndpoint)
