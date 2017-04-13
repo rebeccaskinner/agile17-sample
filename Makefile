@@ -9,8 +9,12 @@ server:
 client-cur:
 	go build current/client-cur.go
 
+client-monadic:
+	go build monadic/client-monadic.go
+
 clean:
 	-rm -f server
 	-rm -f client-cur
+	-rm -f client-monadic
 
-.PHONY: vendor all clean server client-cur
+.PHONY: vendor all clean server client-cur client-monadic
