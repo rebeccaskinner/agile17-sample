@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/rebeccaskinner/agile17-sample/cmd"
+	"github.com/rebeccaskinner/agile17-sample/srv/cmd"
 )
 
 func main() {

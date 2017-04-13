@@ -9,4 +9,8 @@ server:
 client-cur:
 	go build current/client-cur.go
 
-.PHONY: vendor all
+clean:
+	-rm -f server
+	-rm -f client-cur
+
+.PHONY: vendor all clean server client-cur

@@ -25,6 +25,5 @@ _testmain.go
 
 # Vendor
 vendor/client-cur
-server
 client-cur
 vendor
