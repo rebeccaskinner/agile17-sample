@@ -5,13 +5,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
 
 	"github.com/rebeccaskinner/agile17-sample/user"
 	"github.com/rebeccaskinner/gofpher/either"
-	"github.com/rebeccaskinner/gofpher/monad"
 )
 
 func main() {
@@ -26,41 +26,23 @@ func main() {
 		getEndpoint  = fmt.Sprintf("%s/oldusers/%s", config.endpoint, config.username)
 		postEndpoint = fmt.Sprintf("%s/newusers/%s", config.endpoint, config.username)
 		get          = either.WrapEither(http.Get)
+		body         = func(r *http.Response) io.Reader { return r.Body }
 		read         = either.WrapEither(ioutil.ReadAll)
 		fromjson     = either.WrapEither(user.NewFromJSON)
 		mkUser       = either.WrapEither(user.NewUserFromUser)
 		toJSON       = either.WrapEither(json.Marshal)
 	)
 
-	usr := get(getEndpoint).
+	fmt.Println(get(getEndpoint).
+		LiftM(body).
 		AndThen(read).
 		AndThen(fromjson).
 		AndThen(mkUser).
-		AndThen(toJSON)
-
-	buffered := monad.FMap(bytes.NewBuffer, usr).(either.EitherM)
-
-	if buffered.IsLeft() {
-		fmt.Println(buffered.FromLeft().(error))
-		os.Exit(1)
-	}
-
-	buf := buffered.FromRight().(*bytes.Buffer)
-
-	response, err := http.Post(postEndpoint, "application/json", buf)
-
-	if err != nil {
-		fmt.Println("failed to post message: ", err)
-		os.Exit(1)
-	}
-
-	if response.StatusCode != 200 {
-		fmt.Printf("failed to post message: server returned: " + response.Status)
-		os.Exit(1)
-	}
-
-	fmt.Printf("Success")
-
+		AndThen(toJSON).
+		LiftM(bytes.NewBuffer).
+		AndThen(either.WrapEither(func(b *bytes.Buffer) (*http.Response, error) {
+			return http.Post(postEndpoint, "application/json", b)
+		})))
 }
 
 type config struct {

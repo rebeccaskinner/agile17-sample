@@ -1,20 +1,54 @@
-hash: ec75a661a359b39a5b8769ad744b83ed25043cb33ec77a5236c6682cc24edc85
-updated: 2017-04-11T18:03:38.184349779-05:00
+hash: 1ff6ea33a2947786a3d9d6b3f7da97a3caff86f163611438013a86eae1a53816
+updated: 2017-04-14T12:54:13.132478996-05:00
 imports:
-- name: github.com/asteris-llc/gofpher
-  version: b68124a22549c39716e19055d4280d04799da314
+- name: github.com/BurntSushi/toml
+  version: f0aeabca5a127c4078abb8c8d64298b147264b55
+- name: github.com/fsnotify/fsnotify
+  version: 629574ca2a5df945712d3079857300b5e4da0236
+- name: github.com/hashicorp/hcl
+  version: 6f5bfed9a0a22222fbe4e731ae3481730ba41e93
+  subpackages:
+  - hcl/ast
+  - hcl/parser
+  - hcl/scanner
+  - hcl/strconv
+  - hcl/token
+  - json/parser
+  - json/scanner
+  - json/token
+- name: github.com/inconshreveable/mousetrap
+  version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/julienschmidt/httprouter
   version: 6f3f3919c8781ce5c0509c83fffc887a7830c938
+- name: github.com/magiconair/properties
+  version: c265cfa48dda6474e208715ca93e987829f572f8
+- name: github.com/mitchellh/mapstructure
+  version: d2dd0262208475919e1a362f675cfc0e7c10e905
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
+- name: github.com/rebeccaskinner/gofpher
+  version: 334f9eb47766e0cfaa50a8d102db14a59ed24fcd
+  subpackages:
+  - either
+  - monad
 - name: github.com/Sirupsen/logrus
   version: c078b1e43f58d563c74cebe63c85789e76ddb627
+- name: github.com/spf13/cast
+  version: 27b586b42e29bec072fe7379259cc719e1289da6
 - name: github.com/spf13/cobra
-  version: 1dd5ff2e11b6dca62fdcb275eb804b94607d8b06
+  version: f368244301305f414206f889b1735a54cfc8bde8
+- name: github.com/spf13/jwalterweatherman
+  version: 33c24e77fb80341fe7130ee7c594256ff08ccc46
+- name: github.com/spf13/pflag
+  version: cb88ea77998c3f024757528e3305022ab50b43be
+- name: github.com/spf13/viper
+  version: d8a428b8a30606e1d0b355d91edf282609ade1a6
 - name: golang.org/x/sys
-  version: d4feaf1a7e61e1d9e79e6c4e76c6349e9cab0a03
+  version: d75a52659825e75fff6158388dddc6a5b04f9ba5
   subpackages:
   - unix
+- name: gopkg.in/yaml.v2
+  version: a83829b6f1293c91addabc89d0571c246397bbf4
 testImports:
 - name: github.com/davecgh/go-spew
   version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
