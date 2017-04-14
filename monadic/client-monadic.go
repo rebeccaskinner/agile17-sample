@@ -10,6 +10,8 @@ import (
 	"os"
 
 	"github.com/rebeccaskinner/agile17-sample/user"
+	"github.com/rebeccaskinner/gofpher/either"
+	"github.com/rebeccaskinner/gofpher/monad"
 )
 
 func main() {
@@ -23,47 +25,29 @@ func main() {
 	var (
 		getEndpoint  = fmt.Sprintf("%s/oldusers/%s", config.endpoint, config.username)
 		postEndpoint = fmt.Sprintf("%s/newusers/%s", config.endpoint, config.username)
+		get          = either.WrapEither(http.Get)
+		read         = either.WrapEither(ioutil.ReadAll)
+		fromjson     = either.WrapEither(user.NewFromJSON)
+		mkUser       = either.WrapEither(user.NewUserFromUser)
+		toJSON       = either.WrapEither(json.Marshal)
 	)
 
-	response, err := http.Get(getEndpoint)
-	if err != nil {
-		fmt.Println("unable to fetch HTTP data", err)
+	usr := get(getEndpoint).
+		AndThen(read).
+		AndThen(fromjson).
+		AndThen(mkUser).
+		AndThen(toJSON)
+
+	buffered := monad.FMap(bytes.NewBuffer, usr).(either.EitherM)
+
+	if buffered.IsLeft() {
+		fmt.Println(buffered.FromLeft().(error))
 		os.Exit(1)
 	}
 
-	if response.StatusCode != 200 {
-		fmt.Println("server returned " + response.Status)
-		os.Exit(1)
-	}
+	buf := buffered.FromRight().(*bytes.Buffer)
 
-	body, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		fmt.Println("failed to read body: ", err)
-		os.Exit(1)
-	}
-
-	u, err := user.NewFromJSON(body)
-	if err != nil {
-		fmt.Println("failed to deserialize json: ", err)
-		os.Exit(1)
-	}
-
-	newUser, err := user.NewUserFromUser(u)
-
-	if err != nil {
-		fmt.Println("failed to convert user to new format: ", err)
-		os.Exit(1)
-	}
-
-	newUserJSON, err := json.Marshal(newUser)
-
-	if err != nil {
-		fmt.Println("failed to marshal new user: ", err)
-		os.Exit(1)
-	}
-
-	buf := bytes.NewBuffer(newUserJSON)
-	response, err = http.Post(postEndpoint, "application/json", buf)
+	response, err := http.Post(postEndpoint, "application/json", buf)
 
 	if err != nil {
 		fmt.Println("failed to post message: ", err)
