@@ -1,5 +1,5 @@
-hash: 1ff6ea33a2947786a3d9d6b3f7da97a3caff86f163611438013a86eae1a53816
-updated: 2017-04-14T12:54:13.132478996-05:00
+hash: f108654c2ef8ffc4af8dd4ffbfa0627d24952d21d51fd9b5c7e761f070794829
+updated: 2017-04-15T15:04:11.356216969-05:00
 imports:
 - name: github.com/BurntSushi/toml
   version: f0aeabca5a127c4078abb8c8d64298b147264b55
@@ -27,7 +27,7 @@ imports:
 - name: github.com/pkg/errors
   version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/rebeccaskinner/gofpher
-  version: 334f9eb47766e0cfaa50a8d102db14a59ed24fcd
+  version: 705fe5f16fbed9302f42d4838010fa10f7df4ffe
   subpackages:
   - either
   - monad
@@ -36,7 +36,7 @@ imports:
 - name: github.com/spf13/cast
   version: 27b586b42e29bec072fe7379259cc719e1289da6
 - name: github.com/spf13/cobra
-  version: f368244301305f414206f889b1735a54cfc8bde8
+  version: 1dd5ff2e11b6dca62fdcb275eb804b94607d8b06
 - name: github.com/spf13/jwalterweatherman
   version: 33c24e77fb80341fe7130ee7c594256ff08ccc46
 - name: github.com/spf13/pflag
@@ -44,7 +44,7 @@ imports:
 - name: github.com/spf13/viper
   version: d8a428b8a30606e1d0b355d91edf282609ade1a6
 - name: golang.org/x/sys
-  version: d75a52659825e75fff6158388dddc6a5b04f9ba5
+  version: d4feaf1a7e61e1d9e79e6c4e76c6349e9cab0a03
   subpackages:
   - unix
 - name: gopkg.in/yaml.v2
