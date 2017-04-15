@@ -31,18 +31,21 @@ func main() {
 		fromjson     = either.WrapEither(user.NewFromJSON)
 		mkUser       = either.WrapEither(user.NewUserFromUser)
 		toJSON       = either.WrapEither(json.Marshal)
+		updateUser   = either.WrapEither(func(b *bytes.Buffer) (*http.Response, error) {
+			return http.Post(postEndpoint, "application/json", b)
+		})
 	)
 
-	fmt.Println(get(getEndpoint).
+	result := get(getEndpoint).
 		LiftM(body).
 		AndThen(read).
 		AndThen(fromjson).
 		AndThen(mkUser).
 		AndThen(toJSON).
 		LiftM(bytes.NewBuffer).
-		AndThen(either.WrapEither(func(b *bytes.Buffer) (*http.Response, error) {
-			return http.Post(postEndpoint, "application/json", b)
-		})))
+		AndThen(updateUser)
+
+	fmt.Println(result)
 }
 
 type config struct {
