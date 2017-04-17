@@ -26,24 +26,26 @@ func main() {
 		getEndpoint  = fmt.Sprintf("%s/oldusers/%s", config.endpoint, config.username)
 		postEndpoint = fmt.Sprintf("%s/newusers/%s", config.endpoint, config.username)
 		get          = either.WrapEither(http.Get)
+		body         = func(r *http.Response) io.Reader { return r.Body }
+		read         = either.WrapEither(ioutil.ReadAll)
+		fromjson     = either.WrapEither(user.NewFromJSON)
+		mkUser       = either.WrapEither(user.NewUserFromUser)
+		toJSON       = either.WrapEither(json.Marshal)
+		updateUser   = either.WrapEither(func(b *bytes.Buffer) (*http.Response, error) {
+			return http.Post(postEndpoint, "application/json", b)
+		})
 	)
 
 	result := get(getEndpoint).
-		Next(getResponseBody).
-		Next(ioutil.ReadAll).
-		Next(user.NewFromJSON).
-		Next(user.NewUserFromUser).
-		Next(json.Marshal).
-		Next(bytes.NewBuffer).
-		Next(func(b *bytes.Buffer) (*http.Response, error) {
-			return http.Post(postEndpoint, "application/json", b)
-		})
+		LiftM(body).
+		AndThen(read).
+		AndThen(fromjson).
+		AndThen(mkUser).
+		AndThen(toJSON).
+		LiftM(bytes.NewBuffer).
+		AndThen(updateUser)
 
 	fmt.Println(result)
-}
-
-func getResponseBody(r *http.Response) io.Reader {
-	return r.Body
 }
 
 type config struct {
