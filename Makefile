@@ -1,4 +1,4 @@
-all: server client-cur
+all: server client-cur client-monadic
 
 vendor:
 	glide install
