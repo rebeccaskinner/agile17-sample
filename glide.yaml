@@ -4,4 +4,3 @@ import:
   - package: github.com/julienschmidt/httprouter
   - package: github.com/pkg/errors
   - package: github.com/spf13/cobra
-  - package: github.com/rebeccaskinner/gofpher
